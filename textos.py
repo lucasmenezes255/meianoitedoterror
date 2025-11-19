@@ -1,0 +1,1 @@
+# Arquivo onde vão ser armazenados os textos da história e os diálogos entre os personagens
