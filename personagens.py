@@ -2,38 +2,66 @@ import pygame
 from pygame.locals import *
 
 class HomemMeiaNoite(pygame.sprite.Sprite):
-    """
-    Classe que reúne as sprites necessárias para a animação do Homem
-    da Meia-Noite ainda do bem
-    """
-    def __init__(self, pos_x, pos_y):
-        super().__init__()
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
         self.sprites = []
-        self.sprites.append(pygame.image.load('sprites/imagem_1.png'))
-        self.sprites.append(pygame.image.load('sprites/imagem_2.png'))
-        self.sprites.append(pygame.image.load('sprites/imagem_3.png'))
-        self.sprites.append(pygame.image.load('sprites/imagem_4.png'))
-        self.sprite_atual = 0
-        self.image = self.sprites[self.sprite_atual]
-        self.fundo_olinda = pygame.image.load('Imagens/cenarios/olinda(redimensionada).png')
-
+        self.sprites.append(pygame.image.load('imagens/hmn-sprites/hmn_ocio.png'))
+        self.atual = 0
+        self.image = self.sprites[self.atual]
+        self.fundo_olinda = pygame.image.load('Imagens/cenarios/Olinda(redimensionada).png')
+        self.atacando = False
+        self.sofrendo = False
         self.rect = self.image.get_rect()
-        self.rect = (pos_x, pos_y)
-
+        self.x_hmn = x
+        self.y_hmn = y
+        self.rect.bottomright = (self.x_hmn, self.y_hmn)
+        self.vida = 100
+        self.damage = 10
 
     def update(self):
-        """
-        Método para atualizar as imagens e gerar a sensação de movimento
-        """
-        self.sprite_atual += .029
+        if self.sofrendo:
+            self.atual = self.atual + 0.03
+            if self.atual>= len(self.sprites_dano):
+                self.atual = 0
+                self.sofrendo = False
+            self.image = self.sprites_dano[int(self.atual)]
+        elif self.atacando:
+            self.atual = self.atual + 0.07
+            if self.atual>= len(self.sprites_ataque):
+                self.atual = 0
+                self.atacando = False
+            self.image = self.sprites_ataque[int(self.atual)]
+        else:
+            self.atual = self.atual + 0.05
+            if self.atual >= len(self.sprites):
+                self.atual = 0
+            self.image = self.sprites[int(self.atual)]
 
-        if self.sprite_atual >= len(self.sprites):
-            self.sprite_atual = 0
+        self.image = pygame.transform.scale(self.image, (320,320))
+    
+    def ataque(self):
+        self.sprites_ataque = []
+        self.sprites_ataque.append(pygame.image.load('imagens/hmn-sprites/hmn_ataque.png'))
+        self.atual = 0
+        self.image = self.sprites_ataque[self.atual]
+        self.image = pygame.transform.scale(self.image, (320,320))
+        self.fundo_olinda = pygame.image.load('imagens/cenarios/Olinda(redimensionada).png')
 
-        self.image = self.sprites[int(self.sprite_atual)]
+        self.atacando = True
+
+    def dano(self):
+        self.sprites_dano = []
+        self.sprites_dano.append(pygame.image.load('imagens/cf-sprites/fulozinha_dano.png'))
+        self.atual = 0
+        self.image = self.sprites_dano[self.atual]
+        self.image = pygame.transform.scale(self.image, (320,320))
+        self.fundo_olinda = pygame.image.load('imagens/cenarios/Olinda(redimensionada).png')
+        self.vida = self.vida - self.damage
+        self.atacando = False
+        self.sofrendo = True
 
 class ComadreFulozinha(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.sprites = []
         self.sprites.append(pygame.image.load('imagens/cf-sprites/fulozinha_ocio1.png'))
@@ -45,7 +73,11 @@ class ComadreFulozinha(pygame.sprite.Sprite):
         self.atacando = False
         self.sofrendo = False
         self.rect = self.image.get_rect()
-        self.rect.bottomright = 1200, 700
+        self.x_cf = x
+        self.y_cf = y
+        self.rect.bottomright = self.x_cf, self.y_cf
+        self.vida = 100
+        self.damage = 10
 
     def update(self):
         if self.sofrendo:
@@ -55,9 +87,7 @@ class ComadreFulozinha(pygame.sprite.Sprite):
                 self.sofrendo = False
             self.image = self.sprites_dano[int(self.atual)]
         elif self.atacando:
-            self.atual = self.atual + 0.10
-            if int(self.atual) == 2:
-                self.atual = self.atual - 0.07
+            self.atual = self.atual + 0.07
             if self.atual>= len(self.sprites_ataque):
                 self.atual = 0
                 self.atacando = False
@@ -72,10 +102,7 @@ class ComadreFulozinha(pygame.sprite.Sprite):
 
     def ataque(self):
         self.sprites_ataque = []
-        self.sprites_ataque.append(pygame.image.load('imagens/cf-sprites/fulozinha_ataque1.png'))
-        self.sprites_ataque.append(pygame.image.load('imagens/cf-sprites/fulozinha_ataque2.png'))
         self.sprites_ataque.append(pygame.image.load('imagens/cf-sprites/fulozinha_ataque3.png'))
-        self.sprites_ataque.append(pygame.image.load('imagens/cf-sprites/fulozinha_ataque1.png'))
         self.atual = 0
         self.image = self.sprites_ataque[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
@@ -90,12 +117,12 @@ class ComadreFulozinha(pygame.sprite.Sprite):
         self.image = self.sprites_dano[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
         self.fundo_igarassu = pygame.image.load('imagens/cenarios/igarassu(redimensionada).png')
-
+        self.vida = self.vida - self.damage
         self.atacando = False
         self.sofrendo = True
 
 class CaretadeTriunfo(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.sprites = []
         self.sprites.append(pygame.image.load('imagens/cdt-sprites/careta_ocio.png'))
@@ -103,11 +130,15 @@ class CaretadeTriunfo(pygame.sprite.Sprite):
         self.image = self.sprites[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
         self.fundo_triunfo = pygame.image.load('imagens/cenarios/triunfo(redimensionada).png')
-        self.rect = self.image.get_rect()
-        self.rect.bottomright = 1200, 730
-
         self.atacando = False
         self.sofrendo = False
+        self.rect = self.image.get_rect()
+        self.x_cdt = x
+        self.y_cdt = y
+        self.rect.bottomright = self.x_cdt, self.y_cdt
+        self.vida = 100
+        self.damage = 10
+
 
     def update(self):
         if self.sofrendo:
@@ -117,9 +148,7 @@ class CaretadeTriunfo(pygame.sprite.Sprite):
                 self.sofrendo = False
             self.image = self.sprites_dano[int(self.atual)]
         elif self.atacando:
-            self.atual = self.atual + 0.08
-            if int(self.atual) == 2:
-                self.atual = self.atual - 0.07
+            self.atual = self.atual + 0.07
             if self.atual>= len(self.sprites_ataque):
                 self.atual = 0
                 self.atacando = False
@@ -150,55 +179,133 @@ class CaretadeTriunfo(pygame.sprite.Sprite):
         self.image = self.sprites_dano[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
         self.fundo_triunfo = pygame.image.load('imagens/cenarios/triunfo(redimensionada).png')
-
+        self.vida = self.vida - self.damage
         self.atacando = False
         self.sofrendo = True
 
 class Papangu(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.sprites = []
         self.sprites.append(pygame.image.load('imagens/p-sprites/Papangu (2)(redimensionada).png'))
-        self.sprites.append(pygame.image.load('imagens/p-sprites/papangu2.png'))
         self.atual = 0
         self.image = self.sprites[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
         self.fundo_recife = pygame.image.load('imagens/cenarios/Recife(redimensionada).png')
-
-
+        self.atacando = False
+        self.sofrendo = False
         self.rect = self.image.get_rect()
-        self.rect.bottomright = 1200, 700
+        self.x_p = x
+        self.y_p = y
+        self.rect.bottomright = self.x_p, self.y_p
+        self.vida = 100
+        self.damage = 10
 
     def update(self):
-        self.atual = self.atual + 0.05
-        if self.atual >= len(self.sprites):
-            self.atual = 0
-        self.image = self.sprites[int(self.atual)]
+        if self.sofrendo:
+            self.atual = self.atual + 0.03
+            if self.atual>= len(self.sprites_dano):
+                self.atual = 0
+                self.sofrendo = False
+            self.image = self.sprites_dano[int(self.atual)]
+        elif self.atacando:
+            self.atual = self.atual + 0.07
+            if self.atual>= len(self.sprites_ataque):
+                self.atual = 0
+                self.atacando = False
+            self.image = self.sprites_ataque[int(self.atual)]
+        else:
+            self.atual = self.atual + 0.05
+            if self.atual >= len(self.sprites):
+                self.atual = 0
+            self.image = self.sprites[int(self.atual)]
+
         self.image = pygame.transform.scale(self.image, (320,320))
 
+    def ataque(self):
+        self.sprites_ataque = []
+        self.sprites_ataque.append(pygame.image.load('imagens/p-sprites/papangu2.png'))
+        self.atual = 0
+        self.image = self.sprites_ataque[self.atual]
+        self.image = pygame.transform.scale(self.image, (320,320))
+        self.fundo_igarassu = pygame.image.load('imagens/cenarios/Recife(redimensionada).png')
+    
+        self.atacando = True
+
+    def dano(self):
+        self.sprites_dano = []
+        self.sprites_dano.append(pygame.image.load('imagens/p-sprites/papangu_dano.png'))
+        self.atual = 0
+        self.image = self.sprites_dano[self.atual]
+        self.image = pygame.transform.scale(self.image, (320,320))
+        self.fundo_igarassu = pygame.image.load('imagens/cenarios/igarassu(redimensionada).png')
+        self.vida = self.vida - self.damage
+        self.atacando = False
+        self.sofrendo = True
+
 class TriodeFerro(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.sprites = []
-        self.sprites.append(pygame.image.load('imagens/tdf-sprites/Trio de Ferro(redimensionada).png'))
+        self.sprites.append(pygame.image.load('imagens/tdf-sprites/mascotes_ocio.png'))
         self.atual = 0
         self.image = self.sprites[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
         self.fundo_arena = pygame.image.load('imagens/cenarios/arena(redimensionada).png')
-
-
+        self.atacando = False
+        self.sofrendo = False
         self.rect = self.image.get_rect()
-        self.rect.bottomright = 1200, 700
+        self.x_tdf = x
+        self.y_tdf = y
+        self.rect.bottomright = self.x_tdf, self.y_tdf
+        self.vida = 100
+        self.damage = 10
 
     def update(self):
-        self.atual = self.atual + 0.05
-        if self.atual >= len(self.sprites):
-            self.atual = 0
-        self.image = self.sprites[int(self.atual)]
+        if self.sofrendo:
+            self.atual = self.atual + 0.03
+            if self.atual>= len(self.sprites_dano):
+                self.atual = 0
+                self.sofrendo = False
+            self.image = self.sprites_dano[int(self.atual)]
+        elif self.atacando:
+            self.atual = self.atual + 0.07
+            if self.atual>= len(self.sprites_ataque):
+                self.atual = 0
+                self.atacando = False
+            self.image = self.sprites_ataque[int(self.atual)]
+        else:
+            self.atual = self.atual + 0.05
+            if self.atual >= len(self.sprites):
+                self.atual = 0
+            self.image = self.sprites[int(self.atual)]
+
         self.image = pygame.transform.scale(self.image, (320,320))
 
+    def ataque(self):
+        self.sprites_ataque = []
+        self.sprites_ataque.append(pygame.image.load('imagens/tdf-sprites/mascotes_ataque1.png'))
+        self.sprites_ataque.append(pygame.image.load('imagens/tdf-sprites/mascotes_ataque2.png'))
+        self.atual = 0
+        self.image = self.sprites_ataque[self.atual]
+        self.image = pygame.transform.scale(self.image, (320,320))
+        self.fundo_arena = pygame.image.load('imagens/cenarios/arena(redimensionada).png')
+    
+        self.atacando = True
+
+    def dano(self):
+        self.sprites_dano = []
+        self.sprites_dano.append(pygame.image.load('imagens/tdf-sprites/mascotes_dano.png'))
+        self.atual = 0
+        self.image = self.sprites_dano[self.atual]
+        self.image = pygame.transform.scale(self.image, (320,320))
+        self.fundo_arena = pygame.image.load('imagens/cenarios/arena(redimensionada).png')
+        self.vida = self.vida - self.damage
+        self.atacando = False
+        self.sofrendo = True
+
 class Protagonista(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x_prota, y_prota):
         pygame.sprite.Sprite.__init__(self)
         self.sprites = []
         self.sprites.append(pygame.image.load('imagens/protagonista-sprites/prota_ocio1.png'))
@@ -209,7 +316,11 @@ class Protagonista(pygame.sprite.Sprite):
         self.atacando = False
         self.sofrendo = False
         self.rect = self.image.get_rect()
-        self.rect.bottomright = 400, 700
+        self.x_prota = x_prota
+        self.y_prota = y_prota
+        self.rect.bottomright = self.x_prota, self.y_prota
+        self.vida = 10
+        self.damage = 10
 
     def update(self):
         if self.sofrendo:
@@ -218,6 +329,7 @@ class Protagonista(pygame.sprite.Sprite):
                 self.atual = 0
                 self.sofrendo = False
             self.image = self.sprites_dano[int(self.atual)]
+            
         elif self.atacando:
             self.atual = self.atual + 0.08
             if self.atual>= len(self.sprites_ataque):
@@ -247,6 +359,6 @@ class Protagonista(pygame.sprite.Sprite):
         self.atual = 0
         self.image = self.sprites_dano[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
-
+        self.vida = self.vida - self.damage
         self.atacando = False
         self.sofrendo = True
