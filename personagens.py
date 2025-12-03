@@ -60,6 +60,19 @@ class HomemMeiaNoite(pygame.sprite.Sprite):
         self.atacando = False
         self.sofrendo = True
 
+    def desenhar_barra_vida(self, screen, x = 810, y = 20, vida_maxima = 100, largura=400, altura=20, cor=(0,255,0)):
+        if self.vida < 0:
+            self.vida = 0
+        if self.vida > vida_maxima:
+            self.vida = vida_maxima
+
+        proporcao = self.vida / vida_maxima
+        barra_cheia = int(largura * proporcao)
+
+        pygame.draw.rect(screen, (255, 0, 0), (x, y, largura, altura))
+        pygame.draw.rect(screen, cor, (x, y, barra_cheia, altura))
+        pygame.draw.rect(screen, (0, 0, 0), (x, y, largura, altura), 2)
+
 class ComadreFulozinha(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -120,6 +133,19 @@ class ComadreFulozinha(pygame.sprite.Sprite):
         self.vida = self.vida - self.damage
         self.atacando = False
         self.sofrendo = True
+
+    def desenhar_barra_vida(self, screen, x = 810, y = 20, vida_maxima = 100, largura=400, altura=20, cor=(0,255,0)):
+        if self.vida < 0:
+            self.vida = 0
+        if self.vida > vida_maxima:
+            self.vida = vida_maxima
+
+        proporcao = self.vida / vida_maxima
+        barra_cheia = int(largura * proporcao)
+
+        pygame.draw.rect(screen, (255, 0, 0), (x, y, largura, altura))
+        pygame.draw.rect(screen, cor, (x, y, barra_cheia, altura))
+        pygame.draw.rect(screen, (0, 0, 0), (x, y, largura, altura), 2)
 
 class CaretadeTriunfo(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -183,6 +209,19 @@ class CaretadeTriunfo(pygame.sprite.Sprite):
         self.atacando = False
         self.sofrendo = True
 
+    def desenhar_barra_vida(self, screen, x = 810, y = 20, vida_maxima = 100, largura=400, altura=20, cor=(0,255,0)):
+        if self.vida < 0:
+            self.vida = 0
+        if self.vida > vida_maxima:
+            self.vida = vida_maxima
+
+        proporcao = self.vida / vida_maxima
+        barra_cheia = int(largura * proporcao)
+
+        pygame.draw.rect(screen, (255, 0, 0), (x, y, largura, altura))
+        pygame.draw.rect(screen, cor, (x, y, barra_cheia, altura))
+        pygame.draw.rect(screen, (0, 0, 0), (x, y, largura, altura), 2)
+
 class Papangu(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -228,7 +267,7 @@ class Papangu(pygame.sprite.Sprite):
         self.atual = 0
         self.image = self.sprites_ataque[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
-        self.fundo_igarassu = pygame.image.load('imagens/cenarios/Recife(redimensionada).png')
+        self.fundo_recife = pygame.image.load('imagens/cenarios/Recife(redimensionada).png')
     
         self.atacando = True
 
@@ -238,10 +277,23 @@ class Papangu(pygame.sprite.Sprite):
         self.atual = 0
         self.image = self.sprites_dano[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
-        self.fundo_igarassu = pygame.image.load('imagens/cenarios/igarassu(redimensionada).png')
+        self.fundo_recife = pygame.image.load('imagens/cenarios/Recife(redimensionada).png')
         self.vida = self.vida - self.damage
         self.atacando = False
         self.sofrendo = True
+
+    def desenhar_barra_vida(self, screen, x = 810, y = 20, vida_maxima = 100, largura=400, altura=20, cor=(0,255,0)):
+        if self.vida < 0:
+            self.vida = 0
+        if self.vida > vida_maxima:
+            self.vida = vida_maxima
+
+        proporcao = self.vida / vida_maxima
+        barra_cheia = int(largura * proporcao)
+
+        pygame.draw.rect(screen, (255, 0, 0), (x, y, largura, altura))
+        pygame.draw.rect(screen, cor, (x, y, barra_cheia, altura))
+        pygame.draw.rect(screen, (0, 0, 0), (x, y, largura, altura), 2)
 
 class TriodeFerro(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -304,6 +356,19 @@ class TriodeFerro(pygame.sprite.Sprite):
         self.atacando = False
         self.sofrendo = True
 
+    def desenhar_barra_vida(self, screen, x = 810, y = 20, vida_maxima = 100, largura=400, altura=20, cor=(0,255,0)):
+        if self.vida < 0:
+            self.vida = 0
+        if self.vida > vida_maxima:
+            self.vida = vida_maxima
+
+        proporcao = self.vida / vida_maxima
+        barra_cheia = int(largura * proporcao)
+
+        pygame.draw.rect(screen, (255, 0, 0), (x, y, largura, altura))
+        pygame.draw.rect(screen, cor, (x, y, barra_cheia, altura))
+        pygame.draw.rect(screen, (0, 0, 0), (x, y, largura, altura), 2)
+
 class Protagonista(pygame.sprite.Sprite):
     def __init__(self, x_prota, y_prota):
         pygame.sprite.Sprite.__init__(self)
@@ -319,7 +384,7 @@ class Protagonista(pygame.sprite.Sprite):
         self.x_prota = x_prota
         self.y_prota = y_prota
         self.rect.bottomright = self.x_prota, self.y_prota
-        self.vida = 10
+        self.vida = 100
         self.damage = 10
 
     def update(self):
@@ -362,3 +427,16 @@ class Protagonista(pygame.sprite.Sprite):
         self.vida = self.vida - self.damage
         self.atacando = False
         self.sofrendo = True
+
+    def desenhar_barra_vida(self, screen, x = 70, y = 20, vida_maxima = 100, largura=400, altura=20, cor=(0,255,0)):
+        if self.vida < 0:
+            self.vida = 0
+        if self.vida > vida_maxima:
+            self.vida = vida_maxima
+
+        proporcao = self.vida / vida_maxima
+        barra_cheia = int(largura * proporcao)
+
+        pygame.draw.rect(screen, (255, 0, 0), (x, y, largura, altura))
+        pygame.draw.rect(screen, cor, (x, y, barra_cheia, altura))
+        pygame.draw.rect(screen, (0, 0, 0), (x, y, largura, altura), 2)

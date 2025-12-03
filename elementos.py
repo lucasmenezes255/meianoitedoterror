@@ -13,8 +13,8 @@ class Magia(pygame.sprite.Sprite):
         self.callback_fim = None
 
         # Imagem da magia
-        self.image = pygame.Surface((30, 10), pygame.SRCALPHA)
-        self.image.fill((0, 120, 255))  # azul brilhante
+        self.image = pygame.image.load('imagens/magia.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image, (60,60))# azul brilhante
 
         self.rect = self.image.get_rect(center=(-9999,-9999))
         self.mask = pygame.mask.from_surface(self.image)

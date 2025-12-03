@@ -3,13 +3,15 @@ import sys
 from pygame.locals import *
 from personagens import *
 from elementos import *
-from telas import tela_inicial, tela_menu1, tela_derrota
+from telas import tela_inicial, tela_menu1, tela_menu2, tela_menu3, tela_menu4, tela_menufinal, tela_derrota1, tela_derrota2, tela_derrota3, tela_derrota4, tela_derrota5, tela_vitoria
 
 def olinda():
     global animacao_rolando
     screen.blit(hmn_sprites.fundo_olinda, (0,0))
     homem_da_meia_noite.draw(screen)
     homem_da_meia_noite.update()
+    hmn_sprites.desenhar_barra_vida(screen)
+    prota_sprites1.desenhar_barra_vida(screen)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             sys.exit()
@@ -27,13 +29,13 @@ def olinda():
                     animacao_rolando = True
                     if dado9.valor > dado10.valor:
                         if dado9.valor - dado10.valor <= 5:
-                            prota_sprites1.damage == 5
+                            prota_sprites1.damage = 5
                         elif dado9.valor - dado10.valor <= 10:
-                            prota_sprites1.damage == 10
+                            prota_sprites1.damage = 10
                         elif dado9.valor - dado10.valor <= 18:
-                            prota_sprites1.damage == 15
+                            prota_sprites1.damage = 15
                         else:
-                            prota_sprites1.damage == 20
+                            prota_sprites1.damage = 20
                         magia_hmn.ativar()
                         hmn_sprites.ataque()
                     elif dado10.valor> dado9.valor:
@@ -47,21 +49,29 @@ def olinda():
                             hmn_sprites.damage = 20
                         magia_prota1.ativar()
                         prota_sprites1.ataque()
+                    else:
+                        animacao_rolando = False
 
     def liberar_rodada():
         global animacao_rolando
         animacao_rolando = False
-
-    magia_hmn.callback_fim = lambda: liberar_rodada()
-    magia_prota1.callback_fim = lambda: liberar_rodada()
-    print(prota_sprites1.vida, hmn_sprites.vida)
-    return "jogo"
+    if hmn_sprites.vida <= 0:
+        return "tela_vitoria"
+    if prota_sprites1.vida <=0:
+        return "tela_derrota1"
+    else:
+        magia_hmn.callback_fim = lambda: liberar_rodada()
+        magia_prota1.callback_fim = lambda: liberar_rodada()
+        print(prota_sprites1.vida, hmn_sprites.vida)
+        return "olinda"
 
 def igarassu():
-    global animacao_rolando
+    global animacao_rolando, estado
     screen.blit(cf_sprites.fundo_igarassu, (0,0))
     comadre_fulozinha.draw(screen)
     comadre_fulozinha.update()
+    prota_sprites2.desenhar_barra_vida(screen)
+    cf_sprites.desenhar_barra_vida(screen)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             sys.exit()
@@ -79,13 +89,13 @@ def igarassu():
                     animacao_rolando = True
                     if dado1.valor > dado2.valor:
                         if dado1.valor - dado2.valor <= 5:
-                            prota_sprites2.damage == 5
+                            prota_sprites2.damage = 5
                         elif dado1.valor - dado2.valor <= 10:
-                            prota_sprites2.damage == 10
+                            prota_sprites2.damage = 10
                         elif dado1.valor - dado2.valor <= 18:
-                            prota_sprites2.damage == 15
+                            prota_sprites2.damage = 15
                         else:
-                            prota_sprites2.damage == 20
+                            prota_sprites2.damage = 20
                         magia_cf.ativar()
                         cf_sprites.ataque()
                     elif dado2.valor> dado1.valor:
@@ -99,14 +109,19 @@ def igarassu():
                             cf_sprites.damage = 20
                         magia_prota2.ativar()
                         prota_sprites2.ataque()
+                    else:
+                        animacao_rolando = False
+                        
     def liberar_rodada():
         global animacao_rolando
         animacao_rolando = False
 
-    '''if cf_sprites.vida <= 0:
-        tela_vitoria()'''
+    if cf_sprites.vida <= 0:
+        global passou1
+        passou1 = True
+        return "tela_vitoria"
     if prota_sprites2.vida <=0:
-        return tela_derrota()
+        return "tela_derrota1"
     else:
         magia_cf.callback_fim = lambda: liberar_rodada()
         magia_prota2.callback_fim = lambda: liberar_rodada()
@@ -118,6 +133,8 @@ def triunfo():
     screen.blit(cdt_sprites.fundo_triunfo, (0,0))
     careta_de_triunfo.draw(screen)
     careta_de_triunfo.update()
+    cdt_sprites.desenhar_barra_vida(screen)
+    prota_sprites3.desenhar_barra_vida(screen)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             sys.exit()
@@ -135,13 +152,13 @@ def triunfo():
                     animacao_rolando = True
                     if dado3.valor > dado4.valor:
                         if dado3.valor - dado4.valor <= 5:
-                            prota_sprites3.damage == 5
+                            prota_sprites3.damage = 5
                         elif dado3.valor - dado4.valor <= 10:
-                            prota_sprites3.damage == 10
+                            prota_sprites3.damage = 10
                         elif dado3.valor - dado4.valor <= 18:
-                            prota_sprites3.damage == 15
+                            prota_sprites3.damage = 15
                         else:
-                            prota_sprites3.damage == 20
+                            prota_sprites3.damage = 20
                         magia_cdt.ativar()
                         cdt_sprites.ataque()
                     if dado4.valor> dado3.valor:
@@ -155,21 +172,31 @@ def triunfo():
                             cdt_sprites.damage = 20
                         magia_prota3.ativar()
                         prota_sprites3.ataque()
+                    else:
+                        animacao_rolando = False
 
     def liberar_rodada():
         global animacao_rolando
         animacao_rolando = False
-
-    magia_cdt.callback_fim = lambda: liberar_rodada()
-    magia_prota3.callback_fim = lambda: liberar_rodada()
-    print(prota_sprites3.vida, cdt_sprites.vida)
-    return "jogo"
+    if cdt_sprites.vida <= 0:
+        global passou4 
+        passou4 = True
+        return "tela_vitoria"
+    if prota_sprites3.vida <=0:
+        return "tela_derrota1"
+    else:
+        magia_cdt.callback_fim = lambda: liberar_rodada()
+        magia_prota3.callback_fim = lambda: liberar_rodada()
+        print(prota_sprites3.vida, cdt_sprites.vida)
+        return "triunfo"
 
 def recife():
     global animacao_rolando
     screen.blit(p_sprites.fundo_recife, (0,0))
     papangu.draw(screen)
     papangu.update()
+    p_sprites.desenhar_barra_vida(screen)
+    prota_sprites5.desenhar_barra_vida(screen)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             sys.exit()
@@ -187,13 +214,13 @@ def recife():
                     animacao_rolando = True
                     if dado7.valor > dado8.valor:
                         if dado7.valor - dado8.valor <= 5:
-                            prota_sprites5.damage == 5
+                            prota_sprites5.damage = 5
                         elif dado7.valor - dado8.valor <= 10:
-                            prota_sprites5.damage == 10
+                            prota_sprites5.damage = 10
                         elif dado7.valor - dado8.valor <= 18:
-                            prota_sprites5.damage == 15
+                            prota_sprites5.damage = 15
                         else:
-                            prota_sprites5.damage == 20
+                            prota_sprites5.damage = 20
                         magia_p.ativar()
                         p_sprites.ataque()
                     elif dado8.valor> dado7.valor:
@@ -207,21 +234,31 @@ def recife():
                             p_sprites.damage = 20
                         magia_prota5.ativar()
                         prota_sprites5.ataque()
+                    else:
+                        animacao_rolando = False
 
     def liberar_rodada():
         global animacao_rolando
         animacao_rolando = False
-
-    magia_p.callback_fim = lambda: liberar_rodada()
-    magia_prota5.callback_fim = lambda: liberar_rodada()
-    print(prota_sprites5.vida, p_sprites.vida)
-    return "jogo"
+    if p_sprites.vida <= 0:
+        global passou3
+        passou3 = True
+        return "tela_vitoria"
+    if prota_sprites5.vida <=0:
+        return "tela_derrota1"
+    else:
+        magia_p.callback_fim = lambda: liberar_rodada()
+        magia_prota5.callback_fim = lambda: liberar_rodada()
+        print(prota_sprites5.vida, p_sprites.vida)
+        return "recife"
 
 def arena():
     global animacao_rolando
     screen.blit(tdf_sprites.fundo_arena, (0,0))
     trio_de_ferro.draw(screen)
     trio_de_ferro.update()
+    tdf_sprites.desenhar_barra_vida(screen)
+    prota_sprites4.desenhar_barra_vida(screen)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             sys.exit()
@@ -239,13 +276,13 @@ def arena():
                     animacao_rolando = True
                     if dado5.valor > dado6.valor:
                         if dado5.valor - dado6.valor <= 5:
-                            prota_sprites4.damage == 5
+                            prota_sprites4.damage = 5
                         elif dado5.valor - dado6.valor <= 10:
-                            prota_sprites4.damage == 10
+                            prota_sprites4.damage = 10
                         elif dado5.valor - dado6.valor <= 18:
-                            prota_sprites4.damage == 15
+                            prota_sprites4.damage = 15
                         else:
-                            prota_sprites4.damage == 20
+                            prota_sprites4.damage = 20
                         magia_tdf.ativar()
                         tdf_sprites.ataque()
                     elif dado6.valor> dado5.valor:
@@ -259,15 +296,24 @@ def arena():
                             tdf_sprites.damage = 20
                         magia_prota4.ativar()
                         prota_sprites4.ataque()
+                    else:
+                        animacao_rolando = False
 
     def liberar_rodada():
         global animacao_rolando
         animacao_rolando = False
 
-    magia_tdf.callback_fim = lambda: liberar_rodada()
-    magia_prota4.callback_fim = lambda: liberar_rodada()
-    print(prota_sprites4.vida, tdf_sprites.vida)
-    return "jogo"
+    if tdf_sprites.vida <= 0:
+        global passou2 
+        passou2 = True
+        return "tela_vitoria"
+    if prota_sprites4.vida <=0:
+        return "tela_derrota1"
+    else:
+        magia_tdf.callback_fim = lambda: liberar_rodada()
+        magia_prota4.callback_fim = lambda: liberar_rodada()
+        print(prota_sprites4.vida, tdf_sprites.vida)
+        return "arena"
 
 ########################################## CRIAÇÃO DA JANELA ###########################################
 pygame.init()
@@ -352,6 +398,10 @@ papangu.add(p_sprites, prota_sprites5, grupo_dado, grupo_magia)
 
 ########################################## EXECUÇÃO DO CÓDIGO ##########################################
 estado = "telainicial"
+passou1 = False
+passou2 = False
+passou3 = False
+passou4 = False
 ############################## LOOP PRINCIPAL QUE RODA A JANELA DO JOGO ################################ 
 while True:
     for evento in pygame.event.get():
@@ -362,9 +412,35 @@ while True:
         estado = tela_inicial()
     elif estado == "menu1":
         estado = tela_menu1()
+    elif estado == "menu2":
+        estado = tela_menu2()
+    elif estado == "menu3":
+        estado = tela_menu3()
+    elif estado == "menu4":
+        estado = tela_menu4()
+    elif estado == "menufinal":
+        estado = tela_menufinal()
+    elif estado == "tela_derrota1":
+        estado = tela_derrota1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_derrota2":
+        estado = tela_derrota2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_derrota3":
+        estado = tela_derrota3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_derrota4":
+        estado = tela_derrota4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_derrota5":
+        estado = tela_derrota5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_vitoria":
+        estado = tela_vitoria(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
     elif estado == "igarassu":
         estado = igarassu()
-    '''elif estado == "menu2":
-        estado = tela_menu2()'''
+    elif estado == "arena":
+        estado = arena()
+    elif estado == "recife":
+        estado = recife()
+    elif estado == "triunfo":
+        estado = triunfo()
+    elif estado == "olinda":
+        estado = olinda()
     pygame.display.update() # Atualiza a janela 
     clock.tick(60) # Define o limite de 60fps para a janela
