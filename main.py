@@ -421,7 +421,7 @@ while True:
     if estado == "telainicial":
         estado = tela_inicial()
     elif estado == "menu1":
-        estado = tela_menu1()
+        estado = tela_menufinal()
     elif estado == "menu2":
         estado = tela_menu2()
     elif estado == "menu3":
