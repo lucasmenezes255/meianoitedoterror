@@ -3,7 +3,7 @@ import sys
 from pygame.locals import *
 from personagens import *
 from elementos import *
-from telas import tela_inicial, tela_menu1, tela_menu2, tela_menu3, tela_menu4, tela_menufinal, tela_derrota1, tela_derrota2, tela_derrota3, tela_derrota4, tela_derrota5, tela_vitoria
+from telas import tela_inicial, tela_menu1, tela_menu2, tela_menu3, tela_menu4, tela_menufinal, tela_derrota1, tela_derrota2, tela_derrota3, tela_derrota4, tela_derrota5, tela_vitoria1, tela_vitoria2, tela_vitoria3, tela_vitoria4, tela_vitoria5
 
 def olinda():
     global animacao_rolando
@@ -58,7 +58,7 @@ def olinda():
         global animacao_rolando
         animacao_rolando = False
     if hmn_sprites.vida <= 0:
-        return "tela_vitoria"
+        return "tela_vitoria5"
     if prota_sprites1.vida <=0:
         return "tela_derrota5"
     else:
@@ -123,7 +123,7 @@ def igarassu():
     if cf_sprites.vida <= 0:
         global passou1
         passou1 = True
-        return "tela_vitoria"
+        return "tela_vitoria1"
     if prota_sprites2.vida <=0:
         return "tela_derrota1"
     else:
@@ -187,7 +187,7 @@ def triunfo():
     if cdt_sprites.vida <= 0:
         global passou4 
         passou4 = True
-        return "tela_vitoria"
+        return "tela_vitoria4"
     if prota_sprites3.vida <=0:
         return "tela_derrota4"
     else:
@@ -251,7 +251,7 @@ def recife():
     if p_sprites.vida <= 0:
         global passou3
         passou3 = True
-        return "tela_vitoria"
+        return "tela_vitoria3"
     if prota_sprites5.vida <=0:
         return "tela_derrota3"
     else:
@@ -316,7 +316,7 @@ def arena():
     if tdf_sprites.vida <= 0:
         global passou2 
         passou2 = True
-        return "tela_vitoria"
+        return "tela_vitoria2"
     if prota_sprites4.vida <=0:
         return "tela_derrota2"
     else:
@@ -440,8 +440,16 @@ while True:
         estado = tela_derrota4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
     elif estado == "tela_derrota5":
         estado = tela_derrota5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
-    elif estado == "tela_vitoria":
-        estado = tela_vitoria(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_vitoria1":
+        estado = tela_vitoria1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_vitoria2":
+        estado = tela_vitoria2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_vitoria3":
+        estado = tela_vitoria3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_vitoria4":
+        estado = tela_vitoria4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
+    elif estado == "tela_vitoria5":
+        estado = tela_vitoria5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4)
     elif estado == "igarassu":
         estado = igarassu()
     elif estado == "arena":

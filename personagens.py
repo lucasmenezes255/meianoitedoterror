@@ -8,7 +8,7 @@ class HomemMeiaNoite(pygame.sprite.Sprite):
         self.sprites.append(pygame.image.load('imagens/hmn-sprites/hmn_ocio.png'))
         self.atual = 0
         self.image = self.sprites[self.atual]
-        self.fundo_olinda = pygame.image.load('Imagens/cenarios/Olinda(redimensionada).png')
+        self.fundo_olinda = pygame.image.load('imagens/cenarios/olinda(redimensionada).png')
         self.fundo_olinda = pygame.transform.scale(self.fundo_olinda, (1286,724))
         self.atacando = False
         self.sofrendo = False

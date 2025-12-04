@@ -368,7 +368,7 @@ def tela_derrota5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
     pygame.display.update()
     return "tela_derrota5"
 
-def tela_vitoria(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+def tela_vitoria1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
     tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -401,4 +401,144 @@ def tela_vitoria(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, p
                     return "menu2"
 
     pygame.display.update()
-    return "tela_vitoria"
+    return "tela_vitoria1"
+
+def tela_vitoria2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
+    screen.blit(tela_inicial, (0,0))
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:  # Fecha a janela quando clica no X
+            sys.exit()
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_r:
+                cf_sprites.vida = 100
+                prota_sprites2.vida = 100
+                return "arena"
+
+            if evento.key == pygame.K_q:
+                cf_sprites.vida = 100
+                tdf_sprites.vida = 100
+                p_sprites.vida = 100
+                cdt_sprites.vida = 100
+                hmn_sprites.vida = 100
+                prota_sprites1.vida = 100
+                prota_sprites2.vida = 100
+                prota_sprites3.vida = 100
+                prota_sprites4.vida = 100
+                prota_sprites5.vida = 100
+                if passou4:
+                    return "menufinal"
+                elif passou3:
+                    return "menu4"
+                elif passou2:
+                    return "menu3"
+                elif passou1:
+                    return "menu2"
+
+    pygame.display.update()
+    return "tela_vitoria2"
+
+def tela_vitoria3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
+    screen.blit(tela_inicial, (0,0))
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:  # Fecha a janela quando clica no X
+            sys.exit()
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_r:
+                cf_sprites.vida = 100
+                prota_sprites2.vida = 100
+                return "recife"
+
+            if evento.key == pygame.K_q:
+                cf_sprites.vida = 100
+                tdf_sprites.vida = 100
+                p_sprites.vida = 100
+                cdt_sprites.vida = 100
+                hmn_sprites.vida = 100
+                prota_sprites1.vida = 100
+                prota_sprites2.vida = 100
+                prota_sprites3.vida = 100
+                prota_sprites4.vida = 100
+                prota_sprites5.vida = 100
+                if passou4:
+                    return "menufinal"
+                elif passou3:
+                    return "menu4"
+                elif passou2:
+                    return "menu3"
+                elif passou1:
+                    return "menu2"
+
+    pygame.display.update()
+    return "tela_vitoria3"
+
+def tela_vitoria4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
+    screen.blit(tela_inicial, (0,0))
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:  # Fecha a janela quando clica no X
+            sys.exit()
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_r:
+                cf_sprites.vida = 100
+                prota_sprites2.vida = 100
+                return "triunfo"
+
+            if evento.key == pygame.K_q:
+                cf_sprites.vida = 100
+                tdf_sprites.vida = 100
+                p_sprites.vida = 100
+                cdt_sprites.vida = 100
+                hmn_sprites.vida = 100
+                prota_sprites1.vida = 100
+                prota_sprites2.vida = 100
+                prota_sprites3.vida = 100
+                prota_sprites4.vida = 100
+                prota_sprites5.vida = 100
+                if passou4:
+                    return "menufinal"
+                elif passou3:
+                    return "menu4"
+                elif passou2:
+                    return "menu3"
+                elif passou1:
+                    return "menu2"
+
+    pygame.display.update()
+    return "tela_vitoria4"
+
+def tela_vitoria5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
+    screen.blit(tela_inicial, (0,0))
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:  # Fecha a janela quando clica no X
+            sys.exit()
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_r:
+                cf_sprites.vida = 100
+                prota_sprites2.vida = 100
+                return "olinda"
+
+            if evento.key == pygame.K_q:
+                cf_sprites.vida = 100
+                tdf_sprites.vida = 100
+                p_sprites.vida = 100
+                cdt_sprites.vida = 100
+                hmn_sprites.vida = 100
+                prota_sprites1.vida = 100
+                prota_sprites2.vida = 100
+                prota_sprites3.vida = 100
+                prota_sprites4.vida = 100
+                prota_sprites5.vida = 100
+                if passou4:
+                    return "menufinal"
+                elif passou3:
+                    return "menu4"
+                elif passou2:
+                    return "menu3"
+                elif passou1:
+                    return "menu2"
+
+    pygame.display.update()
+    return "tela_vitoria5"
