@@ -28,8 +28,8 @@ class Magia(pygame.sprite.Sprite):
         distancia = (dx**2 + dy**2) ** 0.5
 
         # normaliza o vetor (direção)
-        self.vel_x = dx / distancia * 10   # velocidade 10 px/frame
-        self.vel_y = dy / distancia * 10
+        self.vel_x = dx / distancia * 15   # velocidade 10 px/frame
+        self.vel_y = dy / distancia * 15
 
     def ativar(self):
         self.rect = self.image.get_rect()

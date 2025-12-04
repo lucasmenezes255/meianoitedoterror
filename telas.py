@@ -10,7 +10,7 @@ def tela_inicial():
     """
     Função que exibe a tela inicial. É chamada no loop principal
     """
-    tela_inicial = pygame.image.load('imagens/telas/meia_noite(dimensão padrao).jpg')
+    tela_inicial = pygame.image.load('imagens/telas/meia_noite.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:  # Fecha a janela quando clica no X
@@ -218,6 +218,8 @@ def tela_derrota1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
+                else:
+                    return "menu1"
 
     pygame.display.update()
     return "tela_derrota1"
@@ -253,7 +255,8 @@ def tela_derrota2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
-
+                else:
+                    return "menu1"
     pygame.display.update()
     return "tela_derrota2"
 
@@ -288,7 +291,8 @@ def tela_derrota3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
-
+                else:
+                    return "menu1"
     pygame.display.update()
     return "tela_derrota3"
 
@@ -323,7 +327,8 @@ def tela_derrota4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
-
+                else:
+                    return "menu1"
     pygame.display.update()
     return "tela_derrota4"
 
@@ -358,7 +363,8 @@ def tela_derrota5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
-
+                else:
+                    return "menu1"
     pygame.display.update()
     return "tela_derrota5"
 
@@ -375,11 +381,11 @@ def tela_vitoria(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, p
                 return "igarassu"
 
             if evento.key == pygame.K_q:
-                cf_sprites.vida = 10
-                tdf_sprites.vida = 10
-                p_sprites.vida = 10
-                cdt_sprites.vida = 10
-                hmn_sprites.vida = 10
+                cf_sprites.vida = 100
+                tdf_sprites.vida = 100
+                p_sprites.vida = 100
+                cdt_sprites.vida = 100
+                hmn_sprites.vida = 100
                 prota_sprites1.vida = 100
                 prota_sprites2.vida = 100
                 prota_sprites3.vida = 100

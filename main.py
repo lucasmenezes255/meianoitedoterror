@@ -16,6 +16,8 @@ def olinda():
         if evento.type == pygame.QUIT:
             sys.exit()
         if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_ESCAPE:
+                return "tela_derrota5"
             if evento.key == pygame.K_SPACE:
                 if animacao_rolando:
                     continue
@@ -58,7 +60,7 @@ def olinda():
     if hmn_sprites.vida <= 0:
         return "tela_vitoria"
     if prota_sprites1.vida <=0:
-        return "tela_derrota1"
+        return "tela_derrota5"
     else:
         magia_hmn.callback_fim = lambda: liberar_rodada()
         magia_prota1.callback_fim = lambda: liberar_rodada()
@@ -76,6 +78,8 @@ def igarassu():
         if evento.type == pygame.QUIT:
             sys.exit()
         if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_ESCAPE:
+                return "tela_derrota1"
             if evento.key == pygame.K_SPACE:
                 if animacao_rolando:
                     continue
@@ -139,6 +143,8 @@ def triunfo():
         if evento.type == pygame.QUIT:
             sys.exit()
         if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_ESCAPE:
+                return "tela_derrota4"
             if evento.key == pygame.K_SPACE:
                 if animacao_rolando:
                     continue
@@ -183,7 +189,7 @@ def triunfo():
         passou4 = True
         return "tela_vitoria"
     if prota_sprites3.vida <=0:
-        return "tela_derrota1"
+        return "tela_derrota4"
     else:
         magia_cdt.callback_fim = lambda: liberar_rodada()
         magia_prota3.callback_fim = lambda: liberar_rodada()
@@ -201,6 +207,8 @@ def recife():
         if evento.type == pygame.QUIT:
             sys.exit()
         if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_ESCAPE:
+                    return "tela_derrota3"
             if evento.key == pygame.K_SPACE:
                 if animacao_rolando:
                     continue
@@ -245,7 +253,7 @@ def recife():
         passou3 = True
         return "tela_vitoria"
     if prota_sprites5.vida <=0:
-        return "tela_derrota1"
+        return "tela_derrota3"
     else:
         magia_p.callback_fim = lambda: liberar_rodada()
         magia_prota5.callback_fim = lambda: liberar_rodada()
@@ -263,6 +271,8 @@ def arena():
         if evento.type == pygame.QUIT:
             sys.exit()
         if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_ESCAPE:
+                return "tela_derrota2"
             if evento.key == pygame.K_SPACE:
                 if animacao_rolando:
                     continue
@@ -308,7 +318,7 @@ def arena():
         passou2 = True
         return "tela_vitoria"
     if prota_sprites4.vida <=0:
-        return "tela_derrota1"
+        return "tela_derrota2"
     else:
         magia_tdf.callback_fim = lambda: liberar_rodada()
         magia_prota4.callback_fim = lambda: liberar_rodada()

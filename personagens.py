@@ -9,6 +9,7 @@ class HomemMeiaNoite(pygame.sprite.Sprite):
         self.atual = 0
         self.image = self.sprites[self.atual]
         self.fundo_olinda = pygame.image.load('Imagens/cenarios/Olinda(redimensionada).png')
+        self.fundo_olinda = pygame.transform.scale(self.fundo_olinda, (1286,724))
         self.atacando = False
         self.sofrendo = False
         self.rect = self.image.get_rect()
@@ -20,7 +21,7 @@ class HomemMeiaNoite(pygame.sprite.Sprite):
 
     def update(self):
         if self.sofrendo:
-            self.atual = self.atual + 0.03
+            self.atual = self.atual + 0.06
             if self.atual>= len(self.sprites_dano):
                 self.atual = 0
                 self.sofrendo = False
@@ -38,6 +39,7 @@ class HomemMeiaNoite(pygame.sprite.Sprite):
             self.image = self.sprites[int(self.atual)]
 
         self.image = pygame.transform.scale(self.image, (320,320))
+        self.fundo_olinda = pygame.transform.scale(self.fundo_olinda, (1286,724))
     
     def ataque(self):
         self.sprites_ataque = []
@@ -46,16 +48,18 @@ class HomemMeiaNoite(pygame.sprite.Sprite):
         self.image = self.sprites_ataque[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
         self.fundo_olinda = pygame.image.load('imagens/cenarios/Olinda(redimensionada).png')
+        self.fundo_olinda = pygame.transform.scale(self.fundo_olinda, (1286,724))
 
         self.atacando = True
 
     def dano(self):
         self.sprites_dano = []
-        self.sprites_dano.append(pygame.image.load('imagens/cf-sprites/fulozinha_dano.png'))
+        self.sprites_dano.append(pygame.image.load('imagens/hmn-sprites/hmn_dano.png'))
         self.atual = 0
         self.image = self.sprites_dano[self.atual]
         self.image = pygame.transform.scale(self.image, (320,320))
         self.fundo_olinda = pygame.image.load('imagens/cenarios/Olinda(redimensionada).png')
+        self.fundo_olinda = pygame.transform.scale(self.fundo_olinda, (1286,724))
         self.vida = self.vida - self.damage
         self.atacando = False
         self.sofrendo = True
@@ -94,7 +98,7 @@ class ComadreFulozinha(pygame.sprite.Sprite):
 
     def update(self):
         if self.sofrendo:
-            self.atual = self.atual + 0.03
+            self.atual = self.atual + 0.06
             if self.atual>= len(self.sprites_dano):
                 self.atual = 0
                 self.sofrendo = False
@@ -168,7 +172,7 @@ class CaretadeTriunfo(pygame.sprite.Sprite):
 
     def update(self):
         if self.sofrendo:
-            self.atual = self.atual + 0.03
+            self.atual = self.atual + 0.06
             if self.atual>= len(self.sprites_dano):
                 self.atual = 0
                 self.sofrendo = False
@@ -242,7 +246,7 @@ class Papangu(pygame.sprite.Sprite):
 
     def update(self):
         if self.sofrendo:
-            self.atual = self.atual + 0.03
+            self.atual = self.atual + 0.06
             if self.atual>= len(self.sprites_dano):
                 self.atual = 0
                 self.sofrendo = False
@@ -315,7 +319,7 @@ class TriodeFerro(pygame.sprite.Sprite):
 
     def update(self):
         if self.sofrendo:
-            self.atual = self.atual + 0.03
+            self.atual = self.atual + 0.06
             if self.atual>= len(self.sprites_dano):
                 self.atual = 0
                 self.sofrendo = False
@@ -389,7 +393,7 @@ class Protagonista(pygame.sprite.Sprite):
 
     def update(self):
         if self.sofrendo:
-            self.atual = self.atual + 0.03
+            self.atual = self.atual + 0.06
             if self.atual>= len(self.sprites_dano):
                 self.atual = 0
                 self.sofrendo = False
