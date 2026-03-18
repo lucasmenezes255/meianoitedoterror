@@ -6,6 +6,8 @@ from elementos import *
 from telas import tela_inicial, tela_menu1, tela_menu2, tela_menu3, tela_menu4, tela_menufinal, tela_derrota1, tela_derrota2, tela_derrota3, tela_derrota4, tela_derrota5, tela_vitoria1, tela_vitoria2, tela_vitoria3, tela_vitoria4, tela_vitoria5
 
 def olinda():
+    global screen
+    global fullscreen
     global animacao_rolando
     screen.blit(hmn_sprites.fundo_olinda, (0,0))
     homem_da_meia_noite.draw(screen)
@@ -53,6 +55,14 @@ def olinda():
                         prota_sprites1.ataque()
                     else:
                         animacao_rolando = False
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     def liberar_rodada():
         global animacao_rolando
@@ -68,6 +78,8 @@ def olinda():
         return "olinda"
 
 def igarassu():
+    global screen
+    global fullscreen
     global animacao_rolando, estado
     screen.blit(cf_sprites.fundo_igarassu, (0,0))
     comadre_fulozinha.draw(screen)
@@ -115,6 +127,14 @@ def igarassu():
                         prota_sprites2.ataque()
                     else:
                         animacao_rolando = False
+
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
                         
     def liberar_rodada():
         global animacao_rolando
@@ -133,6 +153,8 @@ def igarassu():
         return "igarassu"
 
 def triunfo():
+    global screen
+    global fullscreen
     global animacao_rolando
     screen.blit(cdt_sprites.fundo_triunfo, (0,0))
     careta_de_triunfo.draw(screen)
@@ -180,6 +202,14 @@ def triunfo():
                         prota_sprites3.ataque()
                     else:
                         animacao_rolando = False
+            
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     def liberar_rodada():
         global animacao_rolando
@@ -197,6 +227,8 @@ def triunfo():
         return "triunfo"
 
 def recife():
+    global screen
+    global fullscreen
     global animacao_rolando
     screen.blit(p_sprites.fundo_recife, (0,0))
     papangu.draw(screen)
@@ -244,6 +276,14 @@ def recife():
                         prota_sprites5.ataque()
                     else:
                         animacao_rolando = False
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     def liberar_rodada():
         global animacao_rolando
@@ -261,6 +301,8 @@ def recife():
         return "recife"
 
 def arena():
+    global screen
+    global fullscreen
     global animacao_rolando
     screen.blit(tdf_sprites.fundo_arena, (0,0))
     trio_de_ferro.draw(screen)
@@ -308,6 +350,14 @@ def arena():
                         prota_sprites4.ataque()
                     else:
                         animacao_rolando = False
+                
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     def liberar_rodada():
         global animacao_rolando
@@ -332,6 +382,7 @@ animacao_rolando = False
 largura_screen = 1280
 altura_screen = 720
 screen = pygame.display.set_mode((largura_screen, altura_screen))
+fullscreen = False
 pygame.display.set_caption('Meia-Noite do Terror')
 ATAQUE_EVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(ATAQUE_EVENT, 6000)
@@ -461,4 +512,4 @@ while True:
     elif estado == "olinda":
         estado = olinda()
     pygame.display.update() # Atualiza a janela 
-    clock.tick(60) # Define o limite de 60fps para a janela
+    clock.tick(40) # Define o limite de 60fps para a janela

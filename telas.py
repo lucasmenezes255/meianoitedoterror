@@ -5,11 +5,14 @@ from pygame.locals import *
 largura_screen = 1280
 altura_screen = 720
 screen = pygame.display.set_mode((largura_screen, altura_screen))
+fullscreen = False
 
 def tela_inicial():
     """
     Função que exibe a tela inicial. É chamada no loop principal
     """
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/meia_noite.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -18,11 +21,20 @@ def tela_inicial():
         if evento.type == pygame.KEYDOWN:  # Verifica se alguma tecla foi pressionada
             if evento.key == pygame.K_RETURN:
                 return "menu1"
-            
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
+
     pygame.display.update()
     return "telainicial"
 
 def tela_menu1():
+    global screen
+    global fullscreen
     centro = (170,370)
     pygame.draw.circle(screen, (0, 0, 255), centro, 100)
     tela_inicial = pygame.image.load('imagens/telas/menu_1.png')
@@ -39,11 +51,20 @@ def tela_menu1():
 
                 if distancia <= 100:
                     return "igarassu"
-
+                
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
     pygame.display.update()
     return "menu1"
 
 def tela_menu2():
+    global screen
+    global fullscreen
     centro = (170, 370)
     pygame.draw.circle(screen, (0, 0, 255), centro, 100)
     centro2 = (415, 370)
@@ -66,11 +87,21 @@ def tela_menu2():
                     return "igarassu"
                 if distancia2 <= 100:
                     return "arena"
+                
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "menu2"
 
 def tela_menu3():
+    global screen
+    global fullscreen
     centro = (170, 370)
     pygame.draw.circle(screen, (0, 0, 255), centro, 100)
     centro2 = (415, 370)
@@ -99,11 +130,21 @@ def tela_menu3():
                     return "arena"
                 if distancia3 <= 100:
                     return "recife"
+                
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "menu3"
 
 def tela_menu4():
+    global screen
+    global fullscreen
     centro = (170, 370)
     pygame.draw.circle(screen, (0, 0, 255), centro, 100)
     centro2 = (415, 370)
@@ -138,11 +179,21 @@ def tela_menu4():
                     return "recife"
                 if distancia4 <= 100:
                     return "triunfo"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "menu4"
 
 def tela_menufinal():
+    global screen
+    global fullscreen
     centro = (170, 370)
     pygame.draw.circle(screen, (0, 0, 255), centro, 100)
     centro2 = (415, 370)
@@ -184,10 +235,20 @@ def tela_menufinal():
                 if distancia5 <= 100:
                     return "olinda"
 
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
+
     pygame.display.update()
     return "menufinal"
 
 def tela_derrota1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/teladerrota.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -220,11 +281,21 @@ def tela_derrota1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu2"
                 else:
                     return "menu1"
+            
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_f:
+                    fullscreen = not fullscreen
+                    if fullscreen:
+                        screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                    else:
+                        screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "tela_derrota1"
 
 def tela_derrota2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/teladerrota.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -257,10 +328,20 @@ def tela_derrota2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu2"
                 else:
                     return "menu1"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
     pygame.display.update()
     return "tela_derrota2"
 
 def tela_derrota3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/teladerrota.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -293,10 +374,21 @@ def tela_derrota3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu2"
                 else:
                     return "menu1"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
+
     pygame.display.update()
     return "tela_derrota3"
 
 def tela_derrota4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/teladerrota.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -329,10 +421,20 @@ def tela_derrota4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu2"
                 else:
                     return "menu1"
+                
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
     pygame.display.update()
     return "tela_derrota4"
 
 def tela_derrota5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/teladerrota.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -365,10 +467,20 @@ def tela_derrota5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu2"
                 else:
                     return "menu1"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
     pygame.display.update()
     return "tela_derrota5"
 
 def tela_vitoria1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -400,10 +512,20 @@ def tela_vitoria1(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                 elif passou1:
                     return "menu2"
 
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
+
     pygame.display.update()
     return "tela_vitoria1"
 
 def tela_vitoria2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -434,11 +556,21 @@ def tela_vitoria2(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "tela_vitoria2"
 
 def tela_vitoria3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -469,11 +601,21 @@ def tela_vitoria3(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "tela_vitoria3"
 
 def tela_vitoria4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -504,11 +646,21 @@ def tela_vitoria4(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "tela_vitoria4"
 
 def tela_vitoria5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, prota_sprites1, prota_sprites2, prota_sprites3, prota_sprites4, prota_sprites5, passou1, passou2, passou3, passou4):
+    global screen
+    global fullscreen
     tela_inicial = pygame.image.load('imagens/telas/telavitoria.png')
     screen.blit(tela_inicial, (0,0))
     for evento in pygame.event.get():
@@ -539,6 +691,14 @@ def tela_vitoria5(cf_sprites, tdf_sprites, p_sprites, cdt_sprites, hmn_sprites, 
                     return "menu3"
                 elif passou1:
                     return "menu2"
+        
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_f:
+                fullscreen = not fullscreen
+                if fullscreen:
+                    screen = pygame.display.set_mode((largura_screen,altura_screen), pygame.FULLSCREEN | pygame.SCALED)
+                else:
+                    screen = pygame.display.set_mode((largura_screen, altura_screen), pygame.SCALED)
 
     pygame.display.update()
     return "tela_vitoria5"
